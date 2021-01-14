@@ -31,8 +31,8 @@ def lambda_handler(event,context):
         txt = process_image(img_path,CROP,CUTTOFF)
         data = {"bucket":BUCKET_IN,"key":k,"ocr-data":txt}
         sdata = json.dumps(data)
-        fo = io.StringIO(sdata)
         fn = get_key(sdata)
+        fo = io.BytesIO(sdata.encode())
         S3.upload_fileobj(fo,BUCKET_OUT,fn)
         print(f"Uploaded: s3://{BUCKET_OUT}/{fn}")
     print("Done.")
