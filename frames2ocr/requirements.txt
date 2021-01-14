@@ -1,0 +1,4 @@
+pytesseract
+boto3
+Pillow
+numpy
